@@ -1,7 +1,3 @@
-# coding: utf-8
-__author__ = 'ZFTurbo: https://kaggle.com/zfturbo'
-
-
 from a1_common_functions import *
 from prepare_features_rus.r3_convert_timeseries_rus import get_russian_regions_names
 

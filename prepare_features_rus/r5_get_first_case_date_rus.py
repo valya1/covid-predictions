@@ -1,7 +1,3 @@
-# coding: utf-8
-__author__ = 'ZFTurbo: https://kaggle.com/zfturbo'
-
-
 from a1_common_functions import *
 from prepare_features_rus.r3_convert_timeseries_rus import get_russian_regions_names
 
@@ -40,4 +36,3 @@ def get_first_case_date(type):
 
 if __name__ == '__main__':
     get_first_case_date('confirmed')
-    get_first_case_date('deaths')

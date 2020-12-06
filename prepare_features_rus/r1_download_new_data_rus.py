@@ -2,8 +2,6 @@
 __author__ = 'ZFTurbo: https://kaggle.com/zfturbo'
 
 
-from a1_common_functions import *
-
 
 def update_current_data():
     store_file1 = INPUT_PATH + 'time_series_covid19_confirmed_RU.csv'

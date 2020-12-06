@@ -1,8 +1,4 @@
-# coding: utf-8
-__author__ = 'ZFTurbo: https://kaggle.com/zfturbo'
-
 from a1_common_functions import *
-
 
 def convert_timeseries_countries(type):
     if type == 'confirmed':
@@ -184,8 +180,8 @@ def create_time_features_rus(plus_day, type):
     print(val_matrix.shape)
 
     out = open(FEATURES_PATH + 'features_rus_predict_{}_day_{}.csv'.format(type, plus_day), 'w')
-    if plus_day > 0:
-        out.write('target,')
+    # if plus_day > 0:
+    out.write('target,')
     out.write('name1,name2,date')
     for i in range(FEAT_SIZE):
         out.write(',case_day_minus_{}'.format(i))
@@ -200,23 +196,16 @@ def create_time_features_rus(plus_day, type):
     print(val_matrix)
 
     for i in range(len(unique_countries)):
-        keywoards_to_delete = ['of', 'republic', 'kray', 'oblast', 'okrug', 'russia']
         name1 = unique_countries[i]
-        splitted_name = name1.split('_')
         name2 = 'XXX'
-        for iso_name in iso_names:
-            splitted_iso_name = iso_name.split('_')
-            splitted_iso_name = [name for name in splitted_iso_name if name.lower() not in keywoards_to_delete]
-            if len(set(splitted_name) & set(splitted_iso_name)) > 0:
-                name2 = iso_name
         for j in range(plus_day, len(unique_dates) - FEAT_SIZE):
-            if plus_day > 0:
-                target = val_matrix[i, j - plus_day]
-                if target == -1:
-                    continue
-                if val_matrix[i, j] == -1:
-                    continue
-                out.write('{},'.format(target))
+            # if plus_day > 0:
+            target = val_matrix[i, j - plus_day]
+            if target == -1:
+                continue
+            if val_matrix[i, j] == -1:
+                continue
+            out.write('{},'.format(target))
             if val_matrix[i, j] == -1:
                 continue
             out.write('{},{},{}'.format(name1, name2, unique_dates[j]))
@@ -231,9 +220,7 @@ def convert_timeseries_only_rus_regions_last_date_manual():
     iso_names2 = get_russian_regions_names()
     in1 = open(INPUT_PATH + 'rus_lastdate.txt')
     out1 = open(FEATURES_PATH + 'time_table_flat_for_rus_latest_{}.csv'.format('confirmed'), 'w')
-    out2 = open(FEATURES_PATH + 'time_table_flat_for_rus_latest_{}.csv'.format('deaths'), 'w')
     out1.write('name,date,cases\n')
-    out2.write('name,date,cases\n')
     dt = datetime.datetime.now().strftime("%Y.%m.%d")
     while 1:
         line = in1.readline().strip()
@@ -247,10 +234,8 @@ def convert_timeseries_only_rus_regions_last_date_manual():
                 name2 = el
                 break
         out1.write('{},{},{}\n'.format(name2, dt, confirmed))
-        out2.write('{},{},{}\n'.format(name2, dt, deaths))
         print(arr)
     out1.close()
-    out2.close()
 
 
 def convert_timeseries_all_regions_last_date():
@@ -312,7 +297,5 @@ def convert_timeseries_all_regions_last_date():
 
 if __name__ == '__main__':
     convert_timeseries_rus('confirmed')
-    convert_timeseries_rus('deaths')
     for i in range(0, DAYS_TO_PREDICT + 1):
         create_time_features_rus(i, 'confirmed')
-        create_time_features_rus(i, 'deaths')

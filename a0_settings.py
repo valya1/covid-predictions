@@ -1,6 +1,3 @@
-# coding: utf-8
-__author__ = 'ZFTurbo: https://kaggle.com/zfturbo'
-
 import os
 
 # How many days to use in lag features

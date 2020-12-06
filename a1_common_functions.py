@@ -1,28 +1,13 @@
-# coding: utf-8
-__author__ = 'ZFTurbo: https://kaggle.com/zfturbo'
-
 import numpy as np
 import gzip
 import pickle
-import glob
-import time
 import cv2
 import datetime
 import pandas as pd
-from sklearn.metrics import fbeta_score
-from sklearn.model_selection import KFold, train_test_split
-from collections import Counter, defaultdict
-from sklearn.metrics import accuracy_score, roc_auc_score
+from collections import Counter
 import random
-import shutil
 import operator
-import platform
-import json
-import base64
-import typing as t
-import zlib
 import requests
-import zipfile
 from a0_settings import *
 
 random.seed(2016)
